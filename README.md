@@ -1,7 +1,7 @@
 # Smart Contract Deployment & Frontend Setup Guide
 
 ## Overview
-### Note: Remember to replace placeholder addresses with your actual deployed contract addresses before running the frontend application!
+### Note: Remember to replace placeholder addresses with your actual deployed contract addresses in ABI.js file before running the frontend application using vite!
 
 This guide covers deploying two smart contracts (Token and Staking) using Remix IDE and setting up a Vite frontend application to interact with them.
 
