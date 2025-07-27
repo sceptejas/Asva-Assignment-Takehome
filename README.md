@@ -26,22 +26,17 @@ This guide covers deploying two smart contracts (Token and Staking) using Remix 
 ## Deployment Method Comparison
 
 ### When to Use Remix:
-- **Learning and prototyping**: Great for beginners
 - **Quick testing**: Fast deployment and testing
-- **Educational purposes**: Visual interface helps understand concepts
-- **Simple projects**: One-off deployments
+- **Testing Smart Contracts without frontend**: Visual interface helps understand concepts
 - **No local setup required**: Works entirely in browser
 
 ### When to Use Hardhat:
 - **Professional development**: Industry standard for production
-- **Complex projects**: Multiple contracts, dependencies
-- **Team collaboration**: Version control, shared configurations  
 - **Automated testing**: Comprehensive test suites
-- **CI/CD integration**: Automated deployment pipelines
 - **Advanced features**: Custom tasks, plugins, scripting
 
 ### Recommendation:
-- **Start with Remix** for learning and initial prototyping
+- **Start with Remix** for initial prototyping
 - **Move to Hardhat** for serious development and production deployment
 
 ---
@@ -144,7 +139,7 @@ This guide covers deploying two smart contracts (Token and Staking) using Remix 
    - Call `getStakingToken()` to verify it points to your token
    - Call `getTotalStaked()` (should return 0 initially)
 
-### Step 7: Test Token Approval (Important!)
+### Step 7: Test Token Approval (Very Important!)
 
 Before users can stake, they need to approve the staking contract:
 
@@ -522,43 +517,13 @@ my-staking-app/
    ```bash
    npm install
    ```
-
-### Step 2: Configure Contract Addresses
-
-Create a file `src/config/contracts.js`:
-
-```javascript
-export const CONTRACT_ADDRESSES = {
-  TOKEN: "YOUR_TOKEN_CONTRACT_ADDRESS",      // Replace with actual address
-  STAKING: "YOUR_STAKING_CONTRACT_ADDRESS"   // Replace with actual address
-};
-
-export const TOKEN_ABI = [
-  // Add your token contract ABI here
-  // From Remix: Copy from compilation artifacts
-  // From Hardhat: Use the generated contract-abis.json file
-];
-
-export const STAKING_ABI = [
-  // Add your staking contract ABI here
-  // From Remix: Copy from compilation artifacts  
-  // From Hardhat: Use the generated contract-abis.json file
-];
-```
-
-### Step 3: Get Contract ABIs
+### Step 3: Get Contract Adress and paste it to ABI.js
 
 #### From Remix:
-1. **After compilation**, go to `contracts/artifacts/MyToken.sol/`
-2. **Copy the ABI** from the compiled JSON file
-3. **Repeat for StakingContract**
-
-#### From Hardhat:
-1. **After compilation**, ABIs are in `artifacts/contracts/[ContractName].sol/[ContractName].json`
-2. **Use the extract-abis.js script** (provided in Hardhat section) to generate `contract-abis.json`
-3. **Import directly** from the generated file
-
-**Add to Config**: Paste the ABIs in your `contracts.js` file
+1. **After compilation**
+2. **Copy the Contract adress of Token and Staking Ccontract** from the compiled JSON file
+3. **Paste in respective variables in ABI.js**
+4. **Replicate the same for hardhat**
 
 ### Step 4: Run the Application
 
@@ -586,11 +551,6 @@ export const STAKING_ABI = [
 
 ### Remix Issues
 
-1. **Compilation Errors**:
-   - Ensure compiler version matches pragma statement
-   - Check that OpenZeppelin imports are correct
-   - Verify all parentheses and semicolons
-
 2. **Deployment Failures**:
    - Check you have enough ETH for gas
    - Verify constructor parameters are correct
@@ -598,13 +558,9 @@ export const STAKING_ABI = [
 
 ### Frontend Issues
 
-1. **Contract Not Found**:
-   - Verify contract addresses are correct
-   - Ensure you're on the correct network
-   - Check that contracts are deployed successfully
-
 2. **Transaction Failures**:
-   - Check token approval before staking
+   - ***Check token approval before staking***
+   - If facing issues test it aginst already deployed contracts
    - Ensure sufficient balance for operations
    - Verify gas settings in MetaMask
 
@@ -619,19 +575,8 @@ For testnets, add these to MetaMask:
 ## Security Considerations
 
 1. **Testnet First**: Always test on testnets before mainnet
-2. **Code Audits**: Consider professional audits for mainnet deployment
 3. **Access Controls**: Verify only owner can call restricted functions
 4. **Reentrancy Protection**: Both contracts include appropriate safeguards
-
----
-
-## Next Steps
-
-1. **Enhanced Frontend**: Add more sophisticated UI components
-2. **Rewards System**: Implement staking rewards in the contract
-3. **Analytics**: Add charts and statistics to the frontend
-4. **Mobile Optimization**: Ensure responsive design
-5. **Error Handling**: Implement comprehensive error handling
 
 ---
 
